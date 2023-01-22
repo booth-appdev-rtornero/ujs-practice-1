@@ -1,31 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<div class="row">
+  <div class="col-md-4">
+    <h2 class="h6 text-center">Not yet started</h2>
+    <ul class="list-group">
+      <% current_user.tasks.not_yet_started.each do |task| %>
+        <li class="list-group-item">
+          <%= task.content %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <h2 class="h6 text-center">In progress</h2>
+        <ul class="list-group">
+      <% current_user.tasks.in_progress.each do |task| %>
+        <li class="list-group-item">
+          <%= task.content %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content</th>
-      <th>Status</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="col-md-4">
+    <h2 class="h6 text-center">Completed</h2>
+    <ul class="list-group">
+      <% current_user.tasks.completed.each do |task| %>
+        <li class="list-group-item">
+          <%= task.content %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.content %></td>
-        <td><%= task.status %></td>
-        <td><%= task.user_id %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Task', new_task_path %>
