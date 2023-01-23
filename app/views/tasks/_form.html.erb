@@ -1,22 +1,24 @@
-<%= form_with(model: task) do |form| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<li id="<%= dom_id(task) %>_<%= dom_id(task) %>_form" class="list-group-item">
+  <%= form_with(model: task, local: false) do |form| %>
+    <% if task.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
 
-      <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% task.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :content, class: "sr-only" %>
+      <%= form.text_area :content, class: "form-control" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit class: "btn btn-outline-secondary btn-block" %>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= form.label :content, class: "sr-only" %>
-    <%= form.text_area :content, class: "form-control" %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit class: "btn btn-outline-secondary btn-block" %>
-  </div>
-<% end %>
+</li>
