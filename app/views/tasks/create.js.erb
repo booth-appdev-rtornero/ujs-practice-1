@@ -1,0 +1,9 @@
+var added_task = $("<%= j(render @task) %>");
+
+added_task.hide();
+
+$("#<%= dom_id(@task.photo) %>_new_task_form").before(added_task);
+
+added_task.slideDown();
+
+$("#<%= dom_id(@task.photo) %>_new_task_form #task_body").val("");
