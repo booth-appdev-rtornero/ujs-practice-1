@@ -1,3 +1,38 @@
 <p id="notice"><%= notice %></p>
 
-<%= render "tasks/task", task: @task %> 
+<div class="row">
+  <div class="col-md-4">
+    <h2 class="h6 text-center">Not yet started</h2>
+    <ul class="list-group">
+
+      <%= render "tasks/form", task: Task.new %>
+
+      <% current_user.tasks.not_yet_started.each do |task| %>
+        <%= render "tasks/task", task: task %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h2 class="h6 text-center">In progress</h2>
+    <ul class="list-group">
+
+
+      <% current_user.tasks.in_progress.each do |task| %>
+        <%= render "tasks/task", task: task %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h2 class="h6 text-center">Completed</h2>
+    <ul class="list-group">
+
+
+      <% current_user.tasks.completed.each do |task| %>
+        <%= render "tasks/task", task: task %>
+      <% end %>
+    </ul>
+  </div>
+
+  

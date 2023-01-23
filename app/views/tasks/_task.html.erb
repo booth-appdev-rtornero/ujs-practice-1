@@ -1,117 +1,32 @@
-<div class="row">
-  <div class="col-md-4">
-    <h2 class="h6 text-center">Not yet started</h2>
-    <ul class="list-group">
+        
+<li id= "<%= dom_id(task) %>" class="list-group-item">
 
-      <%= render "tasks/form", task: Task.new %>
+  <%= task.content %>
 
-      <% current_user.tasks.not_yet_started.each do |task| %>
-        <li class="list-group-item">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="d-grid gap-2">
+        <%= link_to "#", class: "btn btn-link btn-sm" do %>
+          <i class="far fa-check-circle"></i>
+        <% end %>
+      </div>
+    </div>
 
-          <%= task.content %>
+    <div class="col-md-4">
+      <div class="d-grid gap-2">
+        <%= link_to edit_task_path(task), class: "btn btn-link btn-sm", remote: true do %>
+          <i class="fas fa-edit fa-fw"></i>
+        <% end %>
+      </div>
+    </div>
 
-          <div class="row">
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to "#", class: "btn btn-link btn-sm" do %>
-                  <i class="far fa-check-circle"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to edit_task_path(task), class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-edit fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to task, method: :delete, class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-trash fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-          </div>
-
-        </li>
-      <% end %>
-    </ul>
+    <div class="col-md-4">
+      <div class="d-grid gap-2">
+        <%= link_to task, method: :delete, class: "btn btn-link btn-sm", remote: true do %>
+          <i class="fas fa-trash fa-fw"></i>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div class="col-md-4">
-    <h2 class="h6 text-center">In progress</h2>
-    <ul class="list-group">
-      <% current_user.tasks.in_progress.each do |task| %>
-        <li class="list-group-item">
-          <%= task.content %>
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to "#", class: "btn btn-link btn-sm" do %>
-                  <i class="far fa-check-circle"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to edit_task_path(task), class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-edit fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to task, method: :delete, class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-trash fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-
-  <div class="col-md-4">
-    <h2 class="h6 text-center">Completed</h2>
-    <ul class="list-group">
-      <% current_user.tasks.completed.each do |task| %>
-        <li class="list-group-item">
-          <%= task.content %>
-
-          <div class="row">
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to "#", class: "btn btn-link btn-sm" do %>
-                  <i class="far fa-check-circle"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to edit_task_path(task), class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-edit fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-
-            <div class="col-md-4">
-              <div class="d-grid gap-2">
-                <%= link_to task, method: :delete, class: "btn btn-link btn-sm" do %>
-                  <i class="fas fa-trash fa-fw"></i>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+</li>
