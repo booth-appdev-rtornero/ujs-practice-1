@@ -3,10 +3,10 @@
 <div class="row">
   <div class="col-md-4">
     <h2 class="h6 text-center">Not yet started</h2>
+    
+    <%= render "tasks/form", task: current_user.tasks.build %>
+    
     <ul class="list-group">
-
-      <%= render "tasks/form", task: Task.new %>
-
       <% current_user.tasks.not_yet_started.each do |task| %>
         <%= render "tasks/task", task: task %>
       <% end %>

@@ -1,1 +1,1 @@
-$("#<%= dom_id(@task) %>_<%= dom_id(@task) %>_form").replaceWith("<%= j(render @task) %>");
+$("#<%= dom_id @task, :form %>").replaceWith("<%= j(render @task)%>");

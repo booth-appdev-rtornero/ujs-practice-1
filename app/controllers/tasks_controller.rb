@@ -25,19 +25,20 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     @task.user_id = current_user.id
+    @task.status = "not_yet_started"
 
-    p "New task created"
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_back fallback_location: root_url, notice: "Task was successfully created." }
+        format.html { redirect_back fallback_location: root_path, notice: "Task was successfully created." }
         format.json { render :show, status: :created, location: @task }
         format.js
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
