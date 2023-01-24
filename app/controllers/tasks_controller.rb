@@ -1,5 +1,27 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :set_task, only: %i[ show edit update destroy move ]
+
+  def move
+    if @task.status = "not_yet_started"
+      @task.status = "in_progress"
+    elsif @task.status = "in_progress"
+      @task.status = "completed"
+    else
+      @task.status = "in_progress"
+    end
+
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_back fallback_location: root_path, notice: "Task was successfully created." }
+        format.json { render :show, status: :created, location: @task }
+        format.js
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js
+      end
+    end
+  end
 
   # GET /tasks or /tasks.json
   def index
@@ -18,7 +40,7 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     respond_to do |format|
-      format.html
+      format.html 
       format.js
     end
   end
@@ -28,7 +50,6 @@ class TasksController < ApplicationController
     @task = current_user.tasks.build(task_params)
     @task.user_id = current_user.id
     @task.status = "not_yet_started"
-
 
     respond_to do |format|
       if @task.save
@@ -69,13 +90,14 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:content, :status, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:content, :status, :user_id)
+  end
 end
