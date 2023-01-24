@@ -2,24 +2,18 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy move ]
 
   def move
+    p "Entered in move"
+
     if @task.status = "not_yet_started"
-      @task.status = "in_progress"
+      @task.in_progress!
     elsif @task.status = "in_progress"
-      @task.status = "completed"
+      @task.completed!
     else
-      @task.status = "in_progress"
+      @task.in_progress!
     end
 
     respond_to do |format|
-      if @task.save
-        format.html { redirect_back fallback_location: root_path, notice: "Task was successfully created." }
-        format.json { render :show, status: :created, location: @task }
-        format.js
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-        format.js
-      end
+      format.html { redirect_to tasks_url, notice: "Task was successfully updated." }
     end
   end
 
@@ -40,7 +34,7 @@ class TasksController < ApplicationController
   # GET /tasks/1/edit
   def edit
     respond_to do |format|
-      format.html 
+      format.html
       format.js
     end
   end
