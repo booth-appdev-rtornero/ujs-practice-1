@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <h2 class="card-header">Not yet started</h2>
+        <h5 class="card-header">Not yet started</h5>
         
         <%= render "tasks/form", task: current_user.tasks.build %>
         
@@ -19,7 +19,7 @@
     <div class="col-md-4">
       <div class="card">
         
-        <h2 class="card-header">In progress</h2>
+        <h5 class="card-header">In progress</h5>
         <ul class="list-group">
           <% in_progress_tasks = current_user.tasks.in_progress.order(updated_at: :desc) %>
           <% in_progress_tasks.each do |task| %>
@@ -33,7 +33,7 @@
     <div class="col-md-4">
       <div class="card">
         
-        <h2 class="card-header">Completed</h2>
+        <h5 class="card-header">Completed</h5>
         <ul class="list-group">
           <% completed_tasks = current_user.tasks.completed.order(updated_at: :desc) %>
           <% completed_tasks.each do |task| %>
