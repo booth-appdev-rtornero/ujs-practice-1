@@ -2,15 +2,14 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy move ]
 
   def move
-    p "Entered in move"
-
-    if @task.status = "not_yet_started"
+    if @task.not_yet_started?
       @task.in_progress!
-    elsif @task.status = "in_progress"
+    elsif @task.in_progress?
       @task.completed!
     else
       @task.in_progress!
     end
+
 
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: "Task was successfully updated." }

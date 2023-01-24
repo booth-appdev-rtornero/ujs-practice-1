@@ -6,7 +6,8 @@
     <%= render "tasks/form", task: current_user.tasks.build %>
     
     <ul class="list-group">
-      <% current_user.tasks.not_yet_started.each do |task| %>
+      <% not_yet_started_tasks = current_user.tasks.not_yet_started.order(created_at: :asc) %>
+      <% not_yet_started_tasks.each do |task| %>
         <%= render "tasks/task", task: task %>
       <% end %>
     </ul>
@@ -15,9 +16,8 @@
   <div class="col-md-4">
     <h2 class="h6 text-center">In progress</h2>
     <ul class="list-group">
-
-
-      <% current_user.tasks.in_progress.each do |task| %>
+      <% in_progress_tasks = current_user.tasks.in_progress.order(updated_at: :desc) %>
+      <% in_progress_tasks.each do |task| %>
         <%= render "tasks/task", task: task %>
       <% end %>
     </ul>
@@ -26,9 +26,8 @@
   <div class="col-md-4">
     <h2 class="h6 text-center">Completed</h2>
     <ul class="list-group">
-
-
-      <% current_user.tasks.completed.each do |task| %>
+      <% completed_tasks = current_user.tasks.completed.order(updated_at: :desc) %>
+      <% completed_tasks.each do |task| %>
         <%= render "tasks/task", task: task %>
       <% end %>
     </ul>
